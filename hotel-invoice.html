@@ -72,9 +72,9 @@
   td:first-child{color:var(--muted);width:38%}
   td:last-child{font-weight:700}
 
-  .total{display:flex;justify-content:space-between;align-items:center;margin-top:18px;background:var(--navy);color:#fff;border-radius:10px;padding:16px 22px}
-  .total span{font-size:16px;font-weight:600}
-  .total b{font-size:26px;font-weight:800}
+  .total{display:flex;justify-content:space-between;align-items:center;margin-top:16px;background:var(--navy);color:#fff;border-radius:8px;padding:10px 18px}
+  .total span{font-size:14px;font-weight:600}
+  .total b{font-size:19px;font-weight:700}
 
   .notes{margin-top:16px;font-size:14px;white-space:pre-line;background:#fff8e6;border:1px solid #f0dca4;border-radius:8px;padding:10px 14px}
   .notes b{display:block;font-size:12px;color:#8a6d1d;margin-bottom:2px}
@@ -121,11 +121,11 @@
     <fieldset>
       <legend>🧾 بيانات الحجز</legend>
       <div class="grid">
-        <div><label for="quoteNo">سيريال الكوتيشن</label><input id="quoteNo" placeholder="مثال: QT-1001"></div>
-        <div><label for="bookingRef">ريفرنس الحجز</label><input id="bookingRef" placeholder="مثال: LK4Z9S"></div>
-        <div><label for="bookingDate">تاريخ الحجز</label><input id="bookingDate" type="date"></div>
-        <div><label for="agent">اسم الـ Agent</label><input id="agent" dir="auto" placeholder="اسم الـ Agent"></div>
-        <div class="full"><label for="client">اسم العميل / صاحب الحجز</label><input id="client" dir="auto" placeholder="اسم العميل"></div>
+        <div><label for="bookingRef">Booking Ref</label><input id="bookingRef" placeholder="مثال: LK4Z9S"></div>
+        <div><label for="bookingDate">Issued Date</label><input id="bookingDate" type="date"></div>
+        <div><label for="agent">QUO name</label><input id="agent" dir="auto" placeholder="QUO name"></div>
+        <div><label for="salesAgent">Sales Agent</label><input id="salesAgent" dir="auto" placeholder="Sales Agent"></div>
+        <div class="full"><label for="client">Leader name</label><input id="client" dir="auto" placeholder="Leader name"></div>
       </div>
     </fieldset>
 
@@ -182,7 +182,7 @@
         <span class="qt">Quotation Team</span>
         <span class="tel">Tel: (+965) 1899777</span>
       </div>
-      <div class="tag">فاتورة</div>
+      <div class="tag">Invoice</div>
     </div>
 
     <div class="meta" id="pMeta"></div>
@@ -221,11 +221,11 @@
 
   /* ---------- Constants ---------- */
   var MONTHS = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
-  var OPT_AR = {'One way':'ذهاب فقط','Round trip':'ذهاب وعودة','Room Only':'بدون وجبات','Breakfast':'إفطار','Half Board':'نصف إقامة','Full Board':'إقامة كاملة','All Inclusive':'شامل كل شيء'};
+  var OPT_AR = {'One way':'ذهاب فقط','Round trip':'ذهاب وعودة','Room Only':'بدون إفطار','Breakfast':'إفطار','Half Board':'إفطار وعشاء','Full Board':'إفطار وغداء وعشاء','All Inclusive':'إفطار وغداء وعشاء سناكس مشروبات'};
   var CUR = {
     KWD:{dec:3}, SAR:{dec:2}, AED:{dec:2}, USD:{dec:2}, EUR:{dec:2}, QAR:{dec:2}, OMR:{dec:3}
   };
-  var STATIC_IDS = ['quoteNo','bookingRef','bookingDate','agent','client','price','cur','notes'];
+  var STATIC_IDS = ['bookingRef','bookingDate','agent','salesAgent','client','price','cur','notes'];
   var KEY = 'khamees-invoice-v2';
 
   /* ---------- Helpers ---------- */
@@ -514,11 +514,11 @@
   /* ---------- Preview ---------- */
   function metaItems(){
     return [
-      ['سيريال الكوتيشن', dash(S.v.quoteNo)],
-      ['ريفرنس الحجز', dash(S.v.bookingRef)],
-      ['تاريخ الحجز', fmtDate(S.v.bookingDate)],
-      ['اسم العميل', dash(S.v.client)],
-      ['اسم الـ Agent', dash(S.v.agent)],
+      ['Booking Ref', dash(S.v.bookingRef)],
+      ['Issued Date', fmtDate(S.v.bookingDate)],
+      ['Leader name', dash(S.v.client)],
+      ['QUO name', dash(S.v.agent)],
+      ['Sales Agent', dash(S.v.salesAgent)],
       ['نوع الحجز', SERVICES[S.service].label]
     ];
   }
@@ -597,7 +597,7 @@
   function whatsappText(){
     var svc = SERVICES[S.service];
     var d = svc.build(S.v);
-    var L = ['*فاتورة حجز - Al Khamees Travel and Tourism*', 'Quotation Team', 'Tel: (+965) 1899777', ''];
+    var L = ['*Invoice - Al Khamees Travel and Tourism*', 'Quotation Team', 'Tel: (+965) 1899777', ''];
     metaItems().forEach(function(m){ if(m[1] !== '—') L.push(m[0] + ': ' + m[1]); });
     L.push('', '*' + svc.icon + ' ' + svc.label + '*', d.title);
     if(d.bar){
@@ -650,7 +650,7 @@
   });
 
   $('btnClear').addEventListener('click', function(){
-    if(!confirm('مسح كل البيانات؟ (اسم الـ Agent هيفضل)')) return;
+    if(!confirm('مسح كل البيانات؟ (الـ QUO name هيفضل)')) return;
     var keepAgent = S.v.agent || '';
     S.v = {agent:keepAgent, bookingDate:today(), cur:'KWD'};
     S.pol = {};
