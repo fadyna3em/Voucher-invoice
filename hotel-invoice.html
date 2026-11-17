@@ -17,6 +17,8 @@
 
   /* ---------- Form ---------- */
   .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;position:sticky;top:16px;max-height:calc(100vh - 32px);overflow:auto}
+  .top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+  .lang{padding:6px 14px;font-size:13px}
   .panel h1{font-size:20px;margin:0 0 2px}
   .panel .sub{color:var(--muted);font-size:13px;margin:0 0 14px}
   fieldset{border:0;padding:0;margin:0 0 16px}
@@ -80,7 +82,7 @@
   .notes b{display:block;font-size:12px;color:#8a6d1d;margin-bottom:2px}
   .policy{margin-top:20px;border-top:1px solid var(--line);padding-top:12px}
   .policy h3{margin:0 0 6px;font-size:15px;color:var(--navy)}
-  .policy ul{margin:0;padding:0 20px 0 0;font-size:13.5px;color:#33444f;line-height:1.9}
+  .policy ul{margin:0;padding:0;padding-inline-start:20px;font-size:13.5px;color:#33444f;line-height:1.9}
   .foot{margin-top:22px;text-align:center;font-size:12px;color:var(--muted)}
 
   @media (max-width:900px){
@@ -115,7 +117,7 @@
 
   <!-- ===== Form ===== -->
   <aside class="panel">
-    <h1>📄 فاتورة الحجز</h1>
+    <div class="top"><h1>📄 فاتورة الحجز</h1><button class="btn ghost lang" id="btnLang" type="button">English</button></div>
     <p class="sub">املأ الخانات والفاتورة تظهر جاهزة على الجنب.</p>
 
     <fieldset>
@@ -227,12 +229,59 @@
   };
   var STATIC_IDS = ['bookingRef','bookingDate','agent','salesAgent','client','price','cur','notes'];
   var KEY = 'khamees-invoice-v2';
+  var LANG = 'ar';
+  var EN = {"مثال: LK4Z9S":"e.g. LK4Z9S","📄 فاتورة الحجز": "📄 Booking Invoice", "املأ الخانات والفاتورة تظهر جاهزة على الجنب.": "Fill in the fields and the invoice updates live.", "🧾 بيانات الحجز": "🧾 Booking Details", "🗂️ نوع الحجز": "🗂️ Service Type", "نوع الحجز": "Service", "تفاصيل الخدمة": "Service Details", "💰 السعر": "💰 Price", "إجمالي السعر": "Total Price", "العملة": "Currency", "دينار كويتي (KWD)": "Kuwaiti Dinar (KWD)", "ريال سعودي (SAR)": "Saudi Riyal (SAR)", "درهم إماراتي (AED)": "UAE Dirham (AED)", "دولار أمريكي (USD)": "US Dollar (USD)", "يورو (EUR)": "Euro (EUR)", "ريال قطري (QAR)": "Qatari Riyal (QAR)", "ريال عماني (OMR)": "Omani Rial (OMR)", "ملاحظات (اختياري)": "Notes (optional)", "طلبات خاصة، ملاحظات…": "Special requests, remarks…", "📋 سياسة الاستبدال والاسترجاع": "📋 Exchange & Refund Policy", "سياسة الاستبدال والاسترجاع": "Exchange & Refund Policy", "كل سطر = نقطة. كل نوع حجز بيحفظ نصه لوحده.": "One line = one bullet. Each service keeps its own text.", "🖨️ حفظ / طباعة PDF": "🖨️ Save / Print PDF", "📋 نسخ للواتساب": "📋 Copy for WhatsApp", "🗑️ مسح الكل": "🗑️ Clear Form", "الإجمالي": "Total", "ملاحظات": "Notes", "شكراً لاختياركم الخميس للسياحة والسفر": "Thank you for choosing Al Khamees Travel and Tourism", "فاتورة حجز - الخميس للسياحة والسفر": "Booking Invoice - Al Khamees Travel and Tourism", "فندق": "Hotel", "توصيل": "Transfer", "تذكرة ماتش": "Match Ticket", "تذكرة قطار": "Train Ticket", "طيران داخلي": "Domestic Flight", "ضد": "vs", "ذهاب من": "From", "ذهاب إلى": "To", "نوع الرحلة": "Trip Type", "تاريخ الذهاب": "Departure Date", "تاريخ العودة": "Return Date", "عدد البالغين": "Number of Adults", "عدد الأطفال": "Number of Children", "أعمار الأطفال": "Children Ages", "عدد الشنط": "Number of Bags", "رقم الكرسي": "Seat Number(s)", "اسم الفندق": "Hotel Name", "تاريخ تسجيل الدخول": "Check-in Date", "تاريخ تسجيل الخروج": "Check-out Date", "عدد الغرف": "Number of Rooms", "نوع الغرفة": "Room Type", "الوجبات": "Meals", "نوع السيارة": "Car Type", "تاريخ الماتش": "Match Date", "المدينة": "City", "الفريق الأول": "Team 1", "الفريق التاني": "Team 2", "اسم الاستاد": "Stadium Name", "عدد الأشخاص": "Number of Persons", "الدخول": "Check-in", "الخروج": "Check-out", "الأشخاص": "Guests", "الركاب": "Passengers", "الاستاد": "Stadium", "مدينة / مكان الانطلاق": "Departure city / place", "مدينة / مكان الوصول": "Destination city / place", "مثال: 4, 7": "e.g. 4, 7", "مثال: 12A, 12B": "e.g. 12A, 12B", "مثال: فندق هيلتون ياس": "e.g. Hilton Abu Dhabi Yas Island", "مثال: غرفة مزدوجة": "e.g. Double Room", "مثال: سيدان، فان، ميني باص": "e.g. Sedan, Van, Minibus", "مثال: الرياض": "e.g. Riyadh", "اسم الفريق": "Team name", "تم النسخ ✔": "Copied ✔", "تعذر النسخ": "Could not copy", "مسح كل البيانات؟ (الـ QUO name هيفضل)": "Clear all fields? (QUO name is kept.)", "السعر والإمكانية غير ثابتين لحين إتمام الحجز.": "Rates and availability are not guaranteed until the booking is confirmed.", "السعر شامل جميع الضرائب والخدمات ماعدا ضريبة المدينة إن وجدت.": "Rates include all taxes and service charges except city tax, if applicable.", "الحجز غير قابل للتعديل وغير مسترد.": "This booking is non-amendable and non-refundable.", "في حال الإلغاء أو التعديل تُطبق سياسة الفندق المعتمدة وقت الحجز.": "Any cancellation or amendment is subject to the hotel policy at the time of booking.", "يجب تأكيد موعد ومكان الاستلام مع المشغّل قبل السفر.": "Pick-up time and location must be confirmed with the operator before travel.", "في حال الإلغاء أو التعديل تُطبق سياسة المورّد المعتمدة وقت الحجز.": "Any cancellation or amendment is subject to the supplier policy at the time of booking.", "عدم الحضور في الموعد غير مسترد.": "No-shows are non-refundable.", "التذاكر غير قابلة للاسترجاع أو الاستبدال بعد الإصدار.": "Tickets are non-refundable and non-exchangeable once issued.", "الدخول يخضع لقواعد الاستاد والجهة المنظمة.": "Entry is subject to the stadium and organizer rules.", "قد تغيّر الجهة المنظمة موعد الماتش، ولا يُسترد المبلغ بسبب هذا التغيير.": "The match date and time may be changed by the organizer; no refund applies to such changes.", "التذاكر تخضع لقواعد الاسترجاع والاستبدال الخاصة بهيئة السكك الحديدية.": "Tickets are subject to the railway refund and exchange rules.", "يجب أن يحمل المسافر هوية سارية مطابقة لبيانات الحجز.": "Passengers must carry a valid ID matching the booking.", "التعديل يخضع لتوفر المقاعد ورسوم التعديل.": "Amendments are subject to seat availability and fees.", "التذاكر تخضع لقواعد شركة الطيران في التعديل والاسترجاع.": "Tickets are subject to the airline fare rules for changes and refunds.", "يجب أن يحمل المسافر هوية سارية ويصل المطار في الموعد.": "Passengers must carry a valid ID and arrive at the airport on time.", "وزن الشنط المسموح يخضع لسياسة شركة الطيران.": "Baggage allowance follows the airline policy."};
+  function tr(s){ return (LANG === 'en' && EN[s] !== undefined) ? EN[s] : s; }
+  var MONTHS_EN = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var OPT_EN = {'One way':'One way','Round trip':'Round trip','Room Only':'Room Only','Breakfast':'Breakfast','Half Board':'Breakfast & Dinner','Full Board':'Breakfast, Lunch & Dinner','All Inclusive':'Breakfast, Lunch, Dinner, Snacks & Drinks'};
+  function opt(v){ return ((LANG === 'en') ? OPT_EN : OPT_AR)[v] || v; }
+  function loc(d){
+    return {
+      title:d.title,
+      bar: d.bar && {a:{label:tr(d.bar.a.label), val:d.bar.a.val}, mid:d.bar.mid, b: d.bar.b && {label:tr(d.bar.b.label), val:d.bar.b.val}},
+      rows: d.rows.map(function(r){ return [tr(r[0]), r[1]]; })
+    };
+  }
+  var STATIC_NODES = [];
+  function captureStatic(){
+    var w = document.createTreeWalker(document.documentElement, NodeFilter.SHOW_TEXT);
+    var n;
+    while((n = w.nextNode())){
+      var p = n.parentNode.nodeName;
+      if(p === 'SCRIPT' || p === 'STYLE') continue;
+      var k = n.nodeValue.trim();
+      if(EN[k] !== undefined) STATIC_NODES.push({n:n, k:k});
+    }
+    ['placeholder','aria-label'].forEach(function(a){
+      Array.prototype.forEach.call(document.querySelectorAll('[' + a + ']'), function(e){
+        var k = e.getAttribute(a);
+        if(EN[k] !== undefined) STATIC_NODES.push({e:e, a:a, k:k});
+      });
+    });
+  }
+  function applyStatic(){
+    STATIC_NODES.forEach(function(s){
+      if(s.n) s.n.nodeValue = tr(s.k); else s.e.setAttribute(s.a, tr(s.k));
+    });
+  }
+  function setLang(l){
+    LANG = l; S.lang = l;
+    document.documentElement.lang = l;
+    document.documentElement.dir = (l === 'en') ? 'ltr' : 'rtl';
+    applyStatic();
+    $('btnLang').textContent = (l === 'en') ? 'عربي' : 'English';
+    buildChips();
+    buildDynamic();
+    $('policy').value = policyText();
+    render();
+  }
+
 
   /* ---------- Helpers ---------- */
   function fmtDate(v){
     if(!v) return '—';
     var p = v.split('-');
-    return p[2] + ' ' + MONTHS[Number(p[1]) - 1] + ' ' + p[0];
+    return p[2] + ' ' + (LANG === 'en' ? MONTHS_EN : MONTHS)[Number(p[1]) - 1] + ' ' + p[0];
   }
   function dash(v){ return (v !== undefined && v !== null && String(v).trim() !== '') ? String(v).trim() : '—'; }
   function nightsBetween(a, b){
@@ -241,6 +290,7 @@
     return n > 0 ? n : null;
   }
   function nightsText(n){
+    if(LANG === 'en') return n === null ? '— nights' : (n === 1 ? '1 night' : n + ' nights');
     if(n === null) return '— ليالي';
     if(n === 1) return 'ليلة واحدة';
     if(n === 2) return 'ليلتان';
@@ -249,10 +299,10 @@
   function paxText(v){
     var a = Number(v.adults) || 0, k = Number(v.children) || 0;
     var parts = [];
-    if(a) parts.push(a + (a === 1 ? ' بالغ' : ' بالغين'));
+    if(a) parts.push(a + (LANG === 'en' ? (a === 1 ? ' Adult' : ' Adults') : (a === 1 ? ' بالغ' : ' بالغين')));
     if(k){
-      var kid = k + (k === 1 ? ' طفل' : ' أطفال');
-      if(v.childAges && String(v.childAges).trim()) kid += ' (الأعمار: ' + String(v.childAges).trim() + ')';
+      var kid = k + (LANG === 'en' ? (k === 1 ? ' Child' : ' Children') : (k === 1 ? ' طفل' : ' أطفال'));
+      if(v.childAges && String(v.childAges).trim()) kid += (LANG === 'en' ? ' (Ages: ' : ' (الأعمار: ') + String(v.childAges).trim() + ')';
       parts.push(kid);
     }
     return parts.length ? parts.join(' + ') : '—';
@@ -265,13 +315,13 @@
   function route(v){
     var f = String(v.from || '').trim(), t = String(v.to || '').trim();
     if(!f && !t) return '—';
-    return (f || '—') + '  ←  ' + (t || '—');
+    return (f || '—') + (LANG === 'en' ? '  →  ' : '  ←  ') + (t || '—');
   }
   function tripBar(v){
     var round = v.tripType === 'Round trip';
     return {
       a:{label:'تاريخ الذهاب', val:fmtDate(v.departDate)},
-      mid: round ? 'ذهاب وعودة' : 'ذهاب فقط',
+      mid: opt(round ? 'Round trip' : 'One way'),
       b: round ? {label:'تاريخ العودة', val:fmtDate(v.returnDate)} : null
     };
   }
@@ -324,7 +374,7 @@
             ['نوع الغرفة', dash(v.roomType)],
             ['عدد الغرف', dash(v.rooms)],
             ['الأشخاص', paxText(v)],
-            ['الوجبات', dash(OPT_AR[v.meals] || v.meals)]
+            ['الوجبات', dash(opt(v.meals))]
           ]
         };
       },
@@ -369,7 +419,7 @@
       build:function(v){
         var t1 = String(v.team1 || '').trim(), t2 = String(v.team2 || '').trim();
         return {
-          title: (t1 && t2) ? t1 + '  ضد  ' + t2 : (t1 || t2 || '—'),
+          title: (t1 && t2) ? t1 + '  ' + tr('ضد') + '  ' + t2 : (t1 || t2 || '—'),
           bar:null,
           rows:[
             ['تاريخ الماتش', fmtDate(v.matchDate)],
@@ -440,13 +490,13 @@
   function load(){
     try{
       var d = JSON.parse(localStorage.getItem(KEY) || 'null');
-      if(d && d.v && SERVICES[d.service]){ S = {service:d.service, v:d.v, pol:d.pol || {}}; }
+      if(d && d.v && SERVICES[d.service]){ S = {service:d.service, v:d.v, pol:d.pol || {}, lang:d.lang}; }
     }catch(e){}
     if(!S.v.bookingDate) S.v.bookingDate = today();
     if(!S.v.cur) S.v.cur = 'KWD';
   }
   function policyText(){
-    return S.pol[S.service] !== undefined ? S.pol[S.service] : SERVICES[S.service].policy.join('\n');
+    return S.pol[S.service] !== undefined ? S.pol[S.service] : SERVICES[S.service].policy.map(tr).join('\n');
   }
 
   /* ---------- Form building ---------- */
@@ -454,7 +504,7 @@
     var box = $('chips');
     box.innerHTML = '';
     ORDER.forEach(function(key){
-      var b = el('button', 'chip', SERVICES[key].icon + ' ' + SERVICES[key].label);
+      var b = el('button', 'chip', SERVICES[key].icon + ' ' + tr(SERVICES[key].label));
       b.type = 'button';
       b.setAttribute('aria-pressed', key === S.service ? 'true' : 'false');
       b.addEventListener('click', function(){
@@ -470,26 +520,26 @@
 
   function buildDynamic(){
     var svc = SERVICES[S.service];
-    $('dynLegend').textContent = svc.icon + ' تفاصيل ' + svc.label;
+    $('dynLegend').textContent = (LANG === 'en') ? svc.icon + ' ' + tr(svc.label) + ' Details' : svc.icon + ' تفاصيل ' + svc.label;
     var box = $('dyn');
     box.innerHTML = '';
     svc.fields.forEach(function(f){
       if(S.v[f.id] === undefined) S.v[f.id] = f.def || '';
       var wrap = el('div', f.full ? 'full' : '');
       wrap.dataset.fid = f.id;
-      var lab = el('label', '', f.label);
+      var lab = el('label', '', tr(f.label));
       lab.setAttribute('for', 'f_' + f.id);
       var input;
       if(f.type === 'select'){
         input = el('select');
         f.options.forEach(function(o){
-          var op = el('option', '', OPT_AR[o] || o); op.value = o; input.appendChild(op);
+          var op = el('option', '', opt(o)); op.value = o; input.appendChild(op);
         });
       } else {
         input = el('input');
         input.type = f.type;
         if(f.type === 'text') input.setAttribute('dir', 'auto');
-        if(f.ph) input.placeholder = f.ph;
+        if(f.ph) input.placeholder = tr(f.ph);
         if(f.min !== undefined) input.min = f.min;
       }
       input.id = 'f_' + f.id;
@@ -519,13 +569,13 @@
       ['Leader name', dash(S.v.client)],
       ['QUO name', dash(S.v.agent)],
       ['Sales Agent', dash(S.v.salesAgent)],
-      ['نوع الحجز', SERVICES[S.service].label]
-    ];
+      ['نوع الحجز', tr(SERVICES[S.service].label)]
+    ].map(function(m){ return [tr(m[0]), m[1]]; });
   }
 
   function render(){
     var svc = SERVICES[S.service];
-    var d = svc.build(S.v);
+    var d = loc(svc.build(S.v));
 
     // meta
     var meta = $('pMeta');
@@ -539,7 +589,7 @@
       meta.appendChild(box);
     });
 
-    $('pSvc').textContent = svc.icon + ' ' + svc.label;
+    $('pSvc').textContent = svc.icon + ' ' + tr(svc.label);
     $('pTitle').textContent = d.title;
 
     // bar
@@ -596,20 +646,20 @@
   /* ---------- WhatsApp text ---------- */
   function whatsappText(){
     var svc = SERVICES[S.service];
-    var d = svc.build(S.v);
+    var d = loc(svc.build(S.v));
     var L = ['*Invoice - Al Khamees Travel and Tourism*', 'Quotation Team', 'Tel: (+965) 1899777', ''];
     metaItems().forEach(function(m){ if(m[1] !== '—') L.push(m[0] + ': ' + m[1]); });
-    L.push('', '*' + svc.icon + ' ' + svc.label + '*', d.title);
+    L.push('', '*' + svc.icon + ' ' + tr(svc.label) + '*', d.title);
     if(d.bar){
       L.push(d.bar.a.label + ': ' + d.bar.a.val);
       if(d.bar.b) L.push(d.bar.b.label + ': ' + d.bar.b.val);
       L.push(d.bar.mid);
     }
     d.rows.forEach(function(r){ L.push(r[0] + ': ' + r[1]); });
-    L.push('', '💰 *الإجمالي: ' + money(S.v) + '*');
+    L.push('', '💰 *' + tr('الإجمالي') + ': ' + money(S.v) + '*');
     var n = String(S.v.notes || '').trim();
     if(n) L.push('', '📝 ' + n);
-    L.push('', '*سياسة الاستبدال والاسترجاع:*');
+    L.push('', '*' + tr('سياسة الاستبدال والاسترجاع') + ':*');
     policyText().split('\n').forEach(function(l){ l = l.trim(); if(l) L.push('• ' + l); });
     return L.join('\n');
   }
@@ -641,16 +691,16 @@
     function fallback(){
       var ta = document.createElement('textarea');
       ta.value = t; document.body.appendChild(ta); ta.select();
-      try{ document.execCommand('copy'); toast('تم النسخ ✔'); }catch(e){ toast('تعذر النسخ'); }
+      try{ document.execCommand('copy'); toast(tr('تم النسخ ✔')); }catch(e){ toast(tr('تعذر النسخ')); }
       document.body.removeChild(ta);
     }
     if(navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(t).then(function(){ toast('تم النسخ ✔'); }, fallback);
+      navigator.clipboard.writeText(t).then(function(){ toast(tr('تم النسخ ✔')); }, fallback);
     } else fallback();
   });
 
   $('btnClear').addEventListener('click', function(){
-    if(!confirm('مسح كل البيانات؟ (الـ QUO name هيفضل)')) return;
+    if(!confirm(tr('مسح كل البيانات؟ (الـ QUO name هيفضل)'))) return;
     var keepAgent = S.v.agent || '';
     S.v = {agent:keepAgent, bookingDate:today(), cur:'KWD'};
     S.pol = {};
@@ -662,11 +712,11 @@
 
   $('wm').src = document.querySelector('.head img').src;
   load();
-  buildChips();
+  LANG = (S.lang === 'en') ? 'en' : 'ar';
+  captureStatic();
   bindStatic();
-  buildDynamic();
-  $('policy').value = policyText();
-  render();
+  $('btnLang').addEventListener('click', function(){ setLang(LANG === 'en' ? 'ar' : 'en'); });
+  setLang(LANG);
 })();
 </script>
 </body>
