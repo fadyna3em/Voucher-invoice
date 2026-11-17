@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>أدوات الخميس</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#0f2740;--muted:#5d6f7b;--line:#d5dde5;--blue:#0b4fb3;--bg:#f3f6fa}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Cairo',Tahoma,Arial,sans-serif}
+  .wrap{max-width:700px;margin:0 auto;padding:36px 20px 60px}
+  h1{margin:0;font-size:34px;font-weight:800}
+  .sub{color:var(--muted);font-size:15px;margin:6px 0 16px}
+  hr{border:0;border-top:3px solid var(--ink);margin:0 0 28px}
+  .card{display:flex;align-items:center;justify-content:space-between;gap:14px;background:#fff;border:1px solid var(--line);border-right:6px solid var(--blue);border-radius:10px;padding:18px 22px;margin-bottom:16px;text-decoration:none;color:inherit}
+  .card:hover{box-shadow:0 4px 14px rgba(15,39,64,.12)}
+  .card:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+  .info{flex:1}
+  .info b{display:block;font-size:20px}
+  .info span{color:var(--muted);font-size:14px}
+  .ico{font-size:36px;line-height:1}
+  .go{color:var(--blue);font-weight:600;font-size:15px;white-space:nowrap}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>أدوات الخميس</h1>
+  <p class="sub">شركة الخميس للسفر والسياحة. اختار الأداة اللي عايزها.</p>
+  <hr>
+
+  <a class="card" href="hotel-invoice.html">
+    <div class="ico">🧾</div>
+    <div class="info"><b>فاتورة حجز فندق</b><span>فاتورة جاهزة للطباعة أو النسخ للواتساب بالعملة اللي تختارها</span></div>
+    <div class="go">افتح الأداة</div>
+  </a>
+
+  <!-- لإضافة أداة جديدة: انسخ الكارت اللي فوق والصقه هنا وغيّر العنوان والوصف والرابط -->
+</div>
+</body>
+</html>
